@@ -2,31 +2,145 @@
 <html>
     <head>
         <meta charset = "utf-8">
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
     <script src="https://kit.fontawesome.com/84b683efb8.js"></script>
 
     <title>My Website</title>
     </head>
 <body>
-    <div>
-        <div class="col-lg-8 col-md-7">
-            <div class="d-flex flex-column">
-              <div class="p-5 bg-dark text-white">
-                <div class="d-flex flex-row justify-content-between align-items-center">
-                  <h1 class="display-4">Home</h1>
-                  <i class="fab fa-home"></i>
-                  <div>
-                    <h2 class="display-4 align-items-left">About us</h2>
-                      <a href="http:facebook.com">
-                      <i class="fab fa-face"></i>
-                      </a>
-                  </div>
-                  <div>
-                    <h2 class="display-4 align-items-left">Contacts</h2>
-                      <i class="fab fa-telephone"></i>
-                  </div>
+
+<!-- Modal for Department-->
+<div class="modal fade" id="newDepartment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Department</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form> <!--action="/newDepartment" method="post">-->
+  <div class="form-group">
+    <label for="formGroupExampleInput">Name of Department</label>
+    <input required type="text" class="form-control" id="formGroupExampleInput" placeholder="Department">
+  </div>
+    <div class="form-group">
+    <label for="formGroupExampleInput"></label>
+    <input type="submit" class="form-control btn btn-primary">
+  </div>
+  <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+  </div>
+</form>
+      </div>
     </div>
+  </div>
+</div>
+
+
+
+
+ <!-- Modal for Employee-->
+<div class="modal fade" id="newEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Employee</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+ <form><!--action="/newEmployee" method="post"-->
+  <div class="form-group">
+    <label for="formGroupExampleInput">Name of Employee</label>
+    <input required type="text" class="form-control" id="formGroupExampleInput" placeholder="Employee">
+  </div>
+   <div class="form-group">
+    <label for="formGroupExampleInput">KRA Pin</label>
+    <input required type="text" class="form-control" id="formGroupExampleInput" placeholder="KRA Pin">
+    </input>
+  </div>
+     <div class="form-group">
+    <label for="formGroupExampleInput">National Id</label>
+    <input required type="text" class="form-control" id="formGroupExampleInput" placeholder="National ID">
+     </input>
+  </div>
+     <div class="form-group">
+    <label for="formGroupExampleInput">Department</label>
+    <select required class="form-control">
+        <option>Choose Department</option>
+        <option>IT</option>
+        <option>HR</option>
+        <option>Finance</option>
+        <option>Accounting</option>
+    </select>
+     </div>
+     <div class="form-group">
+    <label for="formGroupExampleInput">Email</label>
+    <input required type="email" class="form-control" id="formGroupExampleInput" placeholder="email">
+  </div>
+     <div class="form-group">
+    <label for="formGroupExampleInput">Basic Salary</label>
+    <input required type="number" class="form-control" id="formGroupExampleInput" placeholder="basic salary">
+  </div>
+     <div class="form-group">
+    <label for="formGroupExampleInput">Benefits</label>
+    <input required type="number" class="form-control" id="formGroupExampleInput" placeholder="benefits">
+  </div>
+    <div class="form-group">
+    <label for="formGroupExampleInput"></label>
+    <input type="submit" class="form-control btn btn-primary">
+  </div>
+     <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+</form>
+      </div>
+
+    </div>
+  </div>
+</div>
+    <div>
+        <div class="container-fluid">
+            <!--<header id="main-header">-->
+                <!--<div class="row no-gutters">-->
+                        <div class="d-flex flex-column">
+                           <div class="d-block p-2 bg-dark text-white">
+                             <div class="d-flex flex-row justify-content-between align-items-left">
+                                  <h1 class="display-7 text-left">Home</h1>
+                                  <!--<img class="fab fa-home">-->
+                              </div>
+                               <div class="d-flex flex-row justify-content-center align-items-center">
+                                 <h2 class="display-7 text-center">About us</h2>
+                                 <!--<img class="fab fa-face">-->
+                               </div>
+                               <div class="d-flex flex-row justify-content-end align-items-right">
+                                 <h2 class="display-7 text-right">Contacts</h2>
+                                 <!--<img class="fab fa-telephone">-->
+                                </div>
+                            </div>
+
+
+                        </div>
+            <!-- Button trigger modal for Department-->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newDepartment">
+  Add New Department
+</button>
+<!-- Button trigger modal for Employee-->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEmployee">
+  Add New Employee
+</button>
+                </div>
+        </div>
+    </div>
+    <footer>
+        <p> © 2019 Vanessa</p>
+    </footer>
  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

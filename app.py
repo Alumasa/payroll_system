@@ -19,10 +19,15 @@ def create_tables():
 
 
 # registering a route
-@app.route('/')
+"""@app.route('/newDepartment', methods=['POST'])
 # function to run when clients visit this route
-def hello_world():
-    return render_template('website.html')
+def newDepartment():
+    pass
+@app.route('/newEmployee', methods=['POST'])
+# function to run when clients visit this route
+def newEmployee():
+    pass
+    #return render_template('website.html')"""
 
 # run Flask
 #if __name__ == '__main__':
