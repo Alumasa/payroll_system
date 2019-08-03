@@ -1,5 +1,5 @@
 # importing the flask sqlalchemy object from app(main file)
-from app import db
+from main import db
 from models.Employees import EmployeesModel
 
 
