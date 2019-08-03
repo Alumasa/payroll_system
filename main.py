@@ -5,7 +5,7 @@ from config2 import Development,Production
 
 
 # instantiating or creating an object of class Flask
-app: Flask = Flask(__name__)
+app = Flask(__name__)
 
 app.config.from_object(Production)
 
