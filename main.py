@@ -4,9 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 from config import Development
 
 # instantiating or creating an object of class Flask
-app = Flask(__name__)
+app: Flask = Flask(__name__)
 # this is a config parameter that shows where our database lives, we are at development
-#app.config.from_object(Development)
+app.config.from_object(Development)
 # app.config.from_object(Testing)
 #app.config.from_object(Production)
 
@@ -41,7 +41,7 @@ def newDepartment():
     department_name = request.form['department']
     if DepartmentModel.fetch_by_name(department_name):
         # read more on bootstrap alerts with flash
-        flash("Department" + department_name + "already exists.")  # now create the alerts with flash.
+        flash("Department " + department_name + " already exists.")  # now create the alerts with flash.
         return redirect(url_for('hello_world'))
     department = DepartmentModel(name=department_name)
     department.insert2DB()
