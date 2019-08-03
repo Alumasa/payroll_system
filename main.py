@@ -1,16 +1,14 @@
 # importing Flask class
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
-from config2 import *
-#from config import Development
-#from config import Production
+from config2 import Development,Production
+
 
 # instantiating or creating an object of class Flask
 app: Flask = Flask(__name__)
-# this is a config parameter that shows where our database lives, we are at development
-#app.config.from_object(Development)
-# app.config.from_object(Testing)
+
 app.config.from_object(Production)
+
 
 db = SQLAlchemy(app)
 # to create tables in the database
