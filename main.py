@@ -2,6 +2,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from config import Development
+from config import Production
 
 # instantiating or creating an object of class Flask
 app: Flask = Flask(__name__)
