@@ -6,9 +6,9 @@ from config import Development
 # instantiating or creating an object of class Flask
 app: Flask = Flask(__name__)
 # this is a config parameter that shows where our database lives, we are at development
-app.config.from_object(Development)
+#app.config.from_object(Development)
 # app.config.from_object(Testing)
-#app.config.from_object(Production)
+app.config.from_object(Production)
 
 db = SQLAlchemy(app)
 # to create tables in the database
