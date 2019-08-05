@@ -26,7 +26,9 @@ def create_tables():
 @app.route('/employees/<int:dept_id>')
 def employees(dept_id):
     departments = DepartmentModel.fetch_all()
-    return render_template('employees.html', departments=departments)
+    this_department = DepartmentModel.fetch_by_id(dept_id)
+    employees = this_department.employees
+    return render_template('employees.html', departments=departments, employees=employees)
 
 
 # registering a route
@@ -53,8 +55,21 @@ def newDepartment():
 # function to run when clients visit this route
 def newEmployee():
     name_of_employee = request.form['name']
-    department_id = request.form['department']
+    department_id = int(request.form['department'])
+    gender = request.form['gender']
+    basic_salary = request.form['basic_salary']
+    benefits = request.form['benefits']
+    kra_pin = request.form['kra_pin']
+    national_id = request.form['national_id']
+    email = request.form['email']
+    emp = EmployeesModel(name=name_of_employee, gender=gender, kraPin=kra_pin, departmentId=department_id, basicSalary=basic_salary, benefits=benefits, nationalId=national_id, email=email)
+    emp.insert2DB()
+    return redirect(url_for('hello_world'))
 
+
+@app.route('/payrolls/<int:emp_id>')
+def payrolls(emp_id):
+    return render_template('payrolls.html')
 
 # run Flask
 # if __name__ == '__main__':
