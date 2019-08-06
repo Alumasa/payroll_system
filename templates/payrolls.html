@@ -11,8 +11,8 @@
 </head>
 <body>
 
-<!-- Modal for Employee-->
-<div class="modal fade" id="newEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!-- Modal for Payroll-->
+<div class="modal fade" id="generatePayroll" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -23,50 +23,28 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/newEmployee" method="post">
+                <form action="/generate_payroll/{{ employee.id }}" method="post">
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Name of Employee</label>
-                        <input  name="name" required type="text" class="form-control" id="formGroupExampleInput"
-                               placeholder="Employee">
+                        <label for="formGroupExampleInput">Month</label>
+                        <input  name="month" required type="text" class="form-control" id="formGroupExampleInput"
+                               placeholder="e.g. JAN2019">
                     </div>
                     <div class="form-group">
-                        <label for="formGroupExampleInput">KRA Pin</label>
-                        <input name="kra_pin" required type="text" class="form-control" id="formGroupExampleInput"
-                               placeholder="KRA Pin">
+                        <label for="formGroupExampleInput">Overtime?</label>
+                        <input  name="overtime" value = 0 required type="number" class="form-control" id="formGroupExampleInput"
+                               placeholder="Overtime">
                     </div>
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Gender</label>
-                        <input name="gender" required type="text" class="form-control" id="formGroupExampleInput"
-                               placeholder="gender">
+                        <label for="formGroupExampleInput">Any Loan Deduction?</label>
+                        <input name="loan" value= 0 required type="number" class="form-control" id="formGroupExampleInput"
+                               placeholder="Loan Deduction">
                     </div>
                     <div class="form-group">
-                        <label for="formGroupExampleInput">National Id</label>
-                        <input name ="national_id" required type="text" class="form-control" id="formGroupExampleInput"
-                               placeholder="National ID">
+                        <label for="formGroupExampleInput">Salary Advance?</label>
+                        <input name="advance" value="0" required type="number" class="form-control" id="formGroupExampleInput"
+                               placeholder="advance">
                     </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Department</label>
-                        <select name="department" type="text" required class="form-control">
-                            {% for each in departments %}
-                            <option value=" {{ each.id }}">{{ each.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Email</label>
-                        <input name="email" required type="email" class="form-control" id="formGroupExampleInput"
-                               placeholder="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Basic Salary</label>
-                        <input name="basic_salary" required type="number" class="form-control" id="formGroupExampleInput"
-                               placeholder="basic salary">
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Benefits</label>
-                        <input name="benefits" required type="number" class="form-control" id="formGroupExampleInput"
-                               placeholder="benefits">
-                    </div>
+
                     <div class="form-group">
                         <label for="formGroupExampleInput"></label>
                         <input type="submit" class="form-control btn btn-primary">
@@ -107,7 +85,7 @@
         </div>
 
         <!-- Button trigger modal for Employee-->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEmployee">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#generatePayroll">
             Generate Payroll
         </button>
         <table class="table">

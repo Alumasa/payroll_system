@@ -1,8 +1,8 @@
 # importing Flask class
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
-from config import Development,Production
-
+from resources.payroll_system import KRACalculator as Payroll
+from config import Development
 
 # instantiating or creating an object of class Flask
 app = Flask(__name__)
@@ -25,10 +25,8 @@ def create_tables():
 
 @app.route('/employees/<int:dept_id>')
 def employees(dept_id):
-    departments = DepartmentModel.fetch_all()
     this_department = DepartmentModel.fetch_by_id(dept_id)
-    employees = this_department.employees
-    return render_template('employees.html', departments=departments, employees=employees)
+    return render_template('employees.html', this_department=this_department)
 
 
 # registering a route
@@ -36,6 +34,20 @@ def employees(dept_id):
 def hello_world():
     departments = DepartmentModel.fetch_all()
     return render_template('website.html', departments=departments)
+
+@app.route('/generate_payroll/<int:id>', methods=['POST'])
+def generate_payroll(id):
+    this_employee = EmployeesModel.fetch_by_id(id)
+    payroll = Payroll(this_employee.name, this_employee.basicSalary, this_employee.benefits)
+    NHIF = payroll.NHIF
+    NSSF = payroll.NSSF
+    PAYE = payroll.PAYE
+    net_salary = payroll.net_salary
+    gross_salary = payroll.gross_salary
+    personal_relief = payroll.personal_relief
+    taxable_income = payroll.taxable_income
+
+
 
 
 @app.route('/newDepartment', methods=['POST'])
@@ -69,7 +81,8 @@ def newEmployee():
 
 @app.route('/payrolls/<int:emp_id>')
 def payrolls(emp_id):
-    return render_template('payrolls.html')
+    employee = EmployeesModel.fetch_by_id(emp_id)
+    return render_template('payrolls.html', employee=employee)
 
 # run Flask
 # if __name__ == '__main__':
