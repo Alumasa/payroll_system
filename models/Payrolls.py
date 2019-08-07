@@ -1,11 +1,12 @@
 from main import db
+from models.Employees import EmployeesModel
 
 class PayrollsModel(db.Model):
     __tablename__ = 'payrolls'
-    id = db.Column(db.Integer, primary=True)
+    id = db.Column(db.Integer, primary_key=True)
     gross_salary = db.Column(db.Float)
     personal_relief = db.Column(db.Float)
-    taxable_amount = db.Column(db.Float)
+    taxable_income = db.Column(db.Float)
     overtime = db.Column(db.Float)
     loan_deducted = db.Column(db.Float)
     advance_pay = db.Column(db.Float)
