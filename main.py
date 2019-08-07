@@ -2,13 +2,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from resources.payroll_system import KRACalculator as Payroll
-from config import Development
+from config import Development, Production
 
 # instantiating or creating an object of class Flask
 app = Flask(__name__)
 
-#app.config.from_object(Production)
-app.config.from_object(Development)
+app.config.from_object(Production)
+#app.config.from_object(Development)
 
 
 db = SQLAlchemy(app)
@@ -88,7 +88,7 @@ def newDepartment():
     department_name = request.form['department']
     if DepartmentModel.fetch_by_name(department_name):
         # read more on bootstrap alerts with flash
-        flash("Department " + department_name + " already exists.")  # now create the alerts with flash.
+        flash('Department ' + department_name + ' already exists.', 'danger')  # now create the alerts with flash.
         return redirect(url_for('hello_world'))
     department = DepartmentModel(name=department_name)
     department.insert2DB()
