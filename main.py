@@ -3,12 +3,13 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from resources.payroll_system import KRACalculator as Payroll
 from config import Development, Production
+import pygal
 
 # instantiating or creating an object of class Flask
 app = Flask(__name__)
 
-app.config.from_object(Production)
-#app.config.from_object(Development)
+#app.config.from_object(Production)
+app.config.from_object(Development)
 
 
 db = SQLAlchemy(app)
@@ -35,7 +36,35 @@ def employees(dept_id):
 @app.route('/')
 def hello_world():
     departments = DepartmentModel.fetch_all()
-    return render_template('website.html', departments=departments)
+    all_employees = EmployeesModel.fetch_all()
+    male = 0
+    female = 0
+    others = 0
+    for each in all_employees:
+        if each.gender == 'm':
+            male += 1
+        elif each.gender == 'f':
+            female += 1
+        else:
+            others += 1
+
+    pie_chart = pygal.Pie()
+    pie_chart.title = 'Comparing Company Employees By Gender'
+    pie_chart.add('Male', male)
+    pie_chart.add('Female', female)
+    pie_chart.add('Undecided', others)
+    graph = pie_chart.render_data_uri()
+
+    line_chart = pygal.Bar()
+    line_chart.title = 'Salary Cost per Department'
+    for each_dept in departments:
+        line_chart.add(each_dept.name, DepartmentModel.fetch_total_payroll_by_id(each_dept.id))
+
+    bar_graph = line_chart.render_data_uri()
+
+
+    #print(graph)
+    return render_template('website.html', departments=departments, graph=graph, bar_graph=bar_graph)
 
 @app.route('/generate_payroll/<int:id>', methods=['POST'])
 def generate_payroll(id):
@@ -81,6 +110,22 @@ def deleteEmployee(id):
     this_dept = this_emp.department
     EmployeesModel.delete_by_id(id)
     return redirect(url_for('employees', dept_id=this_dept.id))
+
+@app.route('/editDepartment/<int:id>', methods=['POST'])
+def editDepartment(id):
+    name = request.form['name']
+    DepartmentModel.update_by_id(id, name=name)
+    this_dept = DepartmentModel.fetch_by_id(id)
+    #this_emp = this_dept.id
+    return redirect(url_for('editDepartment', id=this_dept.id))
+
+@app.route('/deleteDepartment/<int:id>')
+def deleteDepartment(id):
+    this_dept = DepartmentModel.fetch_by_id(id)
+    #this_emp = this_dept.employee
+    DepartmentModel.delete_by_id(id)
+    return redirect(url_for('deleteDepartment', id=this_dept))
+
 
 @app.route('/newDepartment', methods=['POST'])
 # function to run when clients visit this route

@@ -20,6 +20,11 @@ class EmployeesModel(db.Model):
     def fetch_by_id(cls, id):
         return cls.query.filter_by(id=id).first()
     #read on keyword/default functions
+
+    @classmethod
+    def fetch_all(cls):
+        return cls.query.all()
+
     #update
     @classmethod
     def update_by_id(cls, id, name=None, gender=None, kraPin=None, email=None, nationalId=None, basicSalary=None, departmentId=None, benefits=None):
@@ -54,7 +59,7 @@ class EmployeesModel(db.Model):
 
     #delete
     @classmethod
-    def delete_by_id(cls,id):
+    def delete_by_id(cls, id):
         record = cls.query.filter_by(id=id)
         record.delete()
         db.session.commit()

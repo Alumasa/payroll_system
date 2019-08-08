@@ -27,3 +27,33 @@ class DepartmentModel(db.Model):
     @classmethod
     def fetch_all(cls):
         return cls.query.all()
+
+    #bar-graphs
+    @classmethod
+    def fetch_total_payroll_by_id(cls, id):
+        this_dept = cls.fetch_by_id(id)
+        total_payroll = 0
+        for each_employee in this_dept.employees:
+            total_payroll += each_employee.basicSalary + each_employee.benefits
+            return total_payroll
+
+
+
+    #update
+    @classmethod
+    def update_by_id(cls, id, name=None):
+        record = cls.fetch_by_id(id)
+
+        if name:
+            record.name = name
+
+        db.session.commit()
+        return True
+
+    #delete
+    @classmethod
+    def delete_by_id(cls, id):
+        record = cls.query.filter_by(id=id)
+        record.delete
+        db.session.commit()
+        return True
