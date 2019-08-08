@@ -8,8 +8,8 @@ import pygal
 # instantiating or creating an object of class Flask
 app = Flask(__name__)
 
-#app.config.from_object(Production)
-app.config.from_object(Development)
+app.config.from_object(Production)
+#app.config.from_object(Development)
 
 
 db = SQLAlchemy(app)
