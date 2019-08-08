@@ -119,12 +119,12 @@ def editDepartment(id):
     #this_emp = this_dept.id
     return redirect(url_for('editDepartment', id=this_dept.id))
 
-@app.route('/deleteDepartment/<int:id>')
+@app.route('/deleteDepartment/<int:id>', methods=['POST'])
 def deleteDepartment(id):
-    this_dept = DepartmentModel.fetch_by_id(id)
+    id = DepartmentModel.fetch_by_id(id)
     #this_emp = this_dept.employee
-    DepartmentModel.delete_by_id(id)
-    return redirect(url_for('deleteDepartment', id=this_dept))
+    DepartmentModel.delete_by_id
+    return redirect(url_for('deleteDepartment', id=id))
 
 
 @app.route('/newDepartment', methods=['POST'])

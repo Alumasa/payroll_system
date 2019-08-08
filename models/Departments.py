@@ -52,8 +52,8 @@ class DepartmentModel(db.Model):
 
     #delete
     @classmethod
-    def delete_by_id(cls, id):
-        record = cls.query.filter_by(id=id)
-        record.delete
+    def delete_by_id(cls):
+        record = cls.query.filter_by_id
+        db.session.delete(record)
         db.session.commit()
         return True
