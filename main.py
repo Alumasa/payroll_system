@@ -8,8 +8,8 @@ import pygal
 # instantiating or creating an object of class Flask
 app = Flask(__name__)
 
-app.config.from_object(Production)
-#app.config.from_object(Development)
+#app.config.from_object(Production)
+app.config.from_object(Development)
 
 
 db = SQLAlchemy(app)
@@ -119,11 +119,11 @@ def editDepartment(id):
     #this_emp = this_dept.id
     return redirect(url_for('editDepartment', id=this_dept.id))
 
-@app.route('/deleteDepartment/<int:id>', methods=['POST'])
+@app.route('/deleteDepartment/<int:id>')
 def deleteDepartment(id):
     id = DepartmentModel.fetch_by_id(id)
     #this_emp = this_dept.employee
-    DepartmentModel.delete_by_id
+    DepartmentModel.delete_by_id(id)
     return redirect(url_for('deleteDepartment', id=id))
 
 

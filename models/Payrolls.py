@@ -16,6 +16,7 @@ class PayrollsModel(db.Model):
     NHIF = db.Column(db.Float)
     net_salary = db.Column(db.Float)
     employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'))
+    employees = db.relationship(EmployeesModel, backref='employees')
 
     def insert2DB(self):
         db.session.add(self)
