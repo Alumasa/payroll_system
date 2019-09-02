@@ -114,10 +114,10 @@ def deleteEmployee(id):
 @app.route('/editDepartment/<int:id>', methods=['POST'])
 def editDepartment(id):
     name = request.form['name']
-    DepartmentModel.update_by_id(id, name=name)
+    DepartmentModel.update_department(id, name=name)
     this_dept = DepartmentModel.fetch_by_id(id)
     #this_emp = this_dept.id
-    return redirect(url_for('editDepartment', id=this_dept.id))
+    return redirect(url_for('hello_world', dept_id=this_dept.id))
 
 @app.route('/deleteDepartment/<int:id>')
 def deleteDepartment(id):

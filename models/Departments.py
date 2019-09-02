@@ -41,8 +41,8 @@ class DepartmentModel(db.Model):
 
     #update
     @classmethod
-    def update_by_id(cls, id, name=None):
-        record = cls.fetch_by_id(id)
+    def update_department(cls, dept_id, name=None):
+        record = cls.fetch_by_id(id=dept_id)
 
         if name:
             record.name = name
